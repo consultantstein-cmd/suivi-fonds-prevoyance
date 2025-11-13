@@ -1,6 +1,6 @@
-// Suivi du Fonds de Prevoyance - Single-file app
-// Password: Cyril
+// Suivi du Fonds de Prevoyance - Single-file app (corrected for GitHub Pages)
 const INITIAL = {"sheet_name": "Outil de suivi", "rows": 35, "cols": 18, "ecart_columns": [13, 15, 17], "data": [["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["Outil de suivi annuel du fonds de prévoyance", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["Copier coller dans toutes les cellules et colonnes en jaune\nProtéger le classeur sans mot de passe\nCopier / coller le Nom du Syndicat ici", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["Valeur du fonds de prévoyance en 2025", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "", "", "Stratégie 1", "", "Stratégie 2", "", "Stratégie 3", ""], ["Année", "No. Année", "Budget annuel", "Dépenses annuelles", "Apport annuel au fonds de prévoyance", "Intérêts des placements", "Apports additionnels", "", "Dépenses prévues dans le plan de maintien de l'actif", "", "Valeur du fonds de prévoyance à la fin de l'année", "", "Valeur cible", "Écart", "Valeur cible", "Écart", "Valeur cible", "Écart"], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "A venir", "", "", "", "", "", "", ""]]};
+
 
 function numberOrZero(v) {
   if (v === null || v === undefined) return 0;
@@ -113,7 +113,7 @@ function DashboardApp() {
         React.createElement('input', {type:'password', placeholder:'Mot de passe', value:pwd, onChange:(e)=>setPwd(e.target.value), className:'w-full p-2 border rounded mb-3'}),
         React.createElement('div', {className:'flex gap-2'},
           React.createElement('button', {className:'px-3 py-2 bg-blue-600 text-white rounded', onClick:tryLogin}, 'Se connecter'),
-          React.createElement('button', {type:'button', className:'px-3 py-2 bg-gray-200 rounded', onClick:()=>{setPwd('Cyril'); alert('Mot de passe rempli automatiquement (Cyril) pour tester')}}, 'Test')
+          React.createElement('button', {type:'button', className:'px-3 py-2 bg-gray-200 rounded', onClick:function(){setPwd('Cyril'); alert('Mot de passe rempli automatiquement (Cyril) pour tester');}}, 'Test')
         )
       ),
       React.createElement('p', {className:'text-sm text-gray-500 mt-3'}, 'Le mot de passe est celui que tu as demande : Cyril.')
@@ -149,13 +149,13 @@ function DashboardApp() {
           React.createElement('div', {ref:tableRef},
             React.createElement('table', {className:'min-w-full table-auto border-collapse text-sm'},
               React.createElement('tbody', null,
-                data.map((row,r) => React.createElement('tr', {key:r, className: r%2===0 ? 'bg-white' : 'bg-gray-50'},
-                  row.map((cell,c) => React.createElement('td', {key:c, className:'border p-2 align-top', style:{minWidth:110}},
+                data.map(function(row,r){ return React.createElement('tr', {key:r, className: r%2===0 ? 'bg-white' : 'bg-gray-50'},
+                  row.map(function(cell,c){ return React.createElement('td', {key:c, className:'border p-2 align-top', style:{minWidth:110}},
                     ECART_COLS.includes(c)
                       ? React.createElement('div', {className:'text-gray-700 whitespace-pre-wrap'}, toStringSafe(cell))
-                      : React.createElement('textarea', {value:toStringSafe(cell), onChange:(e)=>updateCell(r,c,e.target.value), className:'w-full min-h-[2rem] resize-none p-1 border rounded'})
-                  ))
-                ))
+                      : React.createElement('textarea', {value:toStringSafe(cell), onChange:function(e){updateCell(r,c,e.target.value);}, className:'w-full min-h-[2rem] resize-none p-1 border rounded'})
+                  ); })
+                ); })
               )
             )
           )
